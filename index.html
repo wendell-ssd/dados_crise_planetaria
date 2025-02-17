@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crise Planetária</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos Globais */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #00ff88;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            margin: 20px 0;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        /* Botão de Tema */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #00ff88;
+            color: #121212;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: #00cc66;
+        }
+
+        /* Efeitos de Hover */
+        img:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            color: #00ff88;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+        <h1>Crise Planetária</h1>
+        <h2>Mudança Climática</h2>
+        <img src="imgs/climate_change.jpg" alt="Aquecimento Global">
+        <canvas id="chartClimate" class="chart-container"></canvas>
+
+        <h2>Poluição</h2>
+        <img src="imgs/pollution.jpg" alt="Poluição do Ar">
+        <canvas id="chartPollution" class="chart-container"></canvas>
+
+        <h2>Perda de Biodiversidade</h2>
+        <img src="imgs/biodiversity_loss.jpg" alt="Perda de Espécies">
+        <canvas id="chartBiodiversity" class="chart-container"></canvas>
+
+        <h2>Crise Hídrica</h2>
+        <img src="imgs/water_crisis.jpg" alt="Mapa de Secas">
+        <canvas id="chartWater" class="chart-container"></canvas>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Crise Planetária. Todos os direitos reservados.</p>
+        <p>Desenvolvido com <i class="fas fa-heart"></i> para um futuro melhor.</p>
+    </footer>
+
+    <script>
+        // Gráfico de Mudança Climática
+        new Chart(document.getElementById('chartClimate'), {
+            type: 'line',
+            data: {
+                labels: ['2010', '2015', '2020', '2025'],
+                datasets: [{
+                    label: 'Aumento da Temperatura (°C)',
+                    data: [0.85, 1.02, 1.15, 1.3],
+                    borderColor: '#00ff88',
+                    fill: false
+                }]
+            }
+        });
+
+        // Gráfico de Poluição
+        new Chart(document.getElementById('chartPollution'), {
+            type: 'bar',
+            data: {
+                labels: ['CO2', 'CH4', 'NO2'],
+                datasets: [{
+                    label: 'Emissões Globais (GT)',
+                    data: [36, 10, 7],
+                    backgroundColor: ['#ff5555', '#55ff55', '#5555ff']
+                }]
+            }
+        });
+
+        // Gráfico de Perda de Biodiversidade
+        new Chart(document.getElementById('chartBiodiversity'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Extintas', 'Criticamente Ameaçadas', 'Ameaçadas'],
+                datasets: [{
+                    data: [5, 25, 40],
+                    backgroundColor: ['#ff0000', '#ff8800', '#ffff00']
+                }]
+            }
+        });
+
+        // Gráfico de Crise Hídrica
+        new Chart(document.getElementById('chartWater'), {
+            type: 'bar',
+            data: {
+                labels: ['África', 'Ásia', 'América Latina'],
+                datasets: [{
+                    label: 'População sem acesso à água (%)',
+                    data: [40, 30, 20],
+                    backgroundColor: ['#00ff88', '#00cc66', '#009944']
+                }]
+            }
+        });
+
+        // Alternar Tema
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-theme');
+
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (body.classList.contains('light-theme')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                body.style.backgroundColor = '#f4f4f4';
+                body.style.color = '#121212';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                body.style.backgroundColor = '#121212';
+                body.style.color = '#ffffff';
+            }
+        }
+    </script>
+</body>
+</html>
